@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/Users/michael/Documents/Projects/SFML/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/SFML.dir/src/main.cpp.o -c /Users/michael/Documents/Projects/SFML/src/main.cpp",
+  "file": "/Users/michael/Documents/Projects/SFML/src/main.cpp",
+  "output": "CMakeFiles/SFML.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/michael/Documents/Projects/SFML/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/SFML.dir/src/Player.cpp.o -c /Users/michael/Documents/Projects/SFML/src/Player.cpp",
+  "file": "/Users/michael/Documents/Projects/SFML/src/Player.cpp",
+  "output": "CMakeFiles/SFML.dir/src/Player.cpp.o"
+},
+{
+  "directory": "/Users/michael/Documents/Projects/SFML/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/SFML.dir/src/Layer.cpp.o -c /Users/michael/Documents/Projects/SFML/src/Layer.cpp",
+  "file": "/Users/michael/Documents/Projects/SFML/src/Layer.cpp",
+  "output": "CMakeFiles/SFML.dir/src/Layer.cpp.o"
+}
+]
