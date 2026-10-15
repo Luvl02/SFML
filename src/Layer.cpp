@@ -36,9 +36,14 @@ void Map::Load(sf::RenderWindow& window)
 
 void Map::Draw(sf::RenderWindow& window)
 {
-  for(int i = numOfFiles-1; i >= 0; i--)
+
+  for(int i = numOfFiles-1; i >= 1; i--)
   {
-    std::cout << "Drawing sprite" << i << std::endl;
     window.draw( sprite[i] );
   }
+}
+
+void Map::drawLast(sf::RenderWindow &window)
+{
+  window.draw( sprite[0] );
 }

@@ -18,4 +18,5 @@ class Map
    void Load(sf::RenderWindow& window);
 
     void Draw(sf::RenderWindow& window);
+    void drawLast(sf::RenderWindow& window);
   };

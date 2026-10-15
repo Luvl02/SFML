@@ -5,16 +5,20 @@ class Player
 {
   private:
     sf:: Texture standingTexture;
-    sf:: Texture attackTexture;
     sf:: Texture runTexture; 
     sf::Texture runLeftTexture;
+    std::vector<sf::Texture> attackTextures;
 
     sf::Vector2i size;
 
     float playerSpeed;
+
+    sf::Vector2f playerPositiion;
+
   public:
     sf::Sprite sprite;
 
+    int count = -1;
     int Xindex = 0;
     int Yindex = 0;
 
@@ -23,8 +27,8 @@ class Player
     int attackFrame = 0;
     int maxFrames = 10;
     float frameDuration = .1f;
-    bool isAttacking = false;
-    bool attackKeyReleased;
+    float attackFrameDuration = .08;
+    bool isAttacking;
 
   public:
     Player();
@@ -36,5 +40,9 @@ class Player
 
     void Update();
 
+    void handleAttack();
+
     void Draw(sf::RenderWindow& window);
+
+    sf::Vector2f getPosition();
 };

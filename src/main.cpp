@@ -14,6 +14,9 @@ int main()
  settings.antiAliasingLevel = 8;
 
  RenderWindow window(VideoMode({1280, 720}), "Ninjas", Style::Default, State::Windowed, settings);
+
+ sf::View camera(sf::FloatRect({0.f, 0.f}, {1280.f, 720.f}));
+
  window.setFramerateLimit(360);
  /*Init Window*/
 
@@ -46,8 +49,10 @@ int main()
 
     /*Draw*/
     window.clear(Color::Black);
+
     map.Draw( window );
     player.Draw( window );
+    map.drawLast( window );
     window.display();
     /*Draw*/
     }
