@@ -27,8 +27,8 @@ class Player
     int attackFrame = 0;
     int maxFrames = 10;
     float frameDuration = .1f;
-    float attackFrameDuration = .08;
-    bool isAttacking;
+    float attackFrameDuration = .08f;
+    bool isAttacking = false;
 
   public:
     Player();
@@ -41,6 +41,8 @@ class Player
     void Update();
 
     void handleAttack();
+
+    void handleInput();
 
     void Draw(sf::RenderWindow& window);
 
