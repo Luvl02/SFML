@@ -114,11 +114,41 @@ CMakeFiles/SFML.dir/src/Layer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SFML.dir/src/Layer.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/michael/Documents/Projects/SFML/src/Layer.cpp -o CMakeFiles/SFML.dir/src/Layer.cpp.s
 
+CMakeFiles/SFML.dir/src/Enemy.cpp.o: CMakeFiles/SFML.dir/flags.make
+CMakeFiles/SFML.dir/src/Enemy.cpp.o: /Users/michael/Documents/Projects/SFML/src/Enemy.cpp
+CMakeFiles/SFML.dir/src/Enemy.cpp.o: CMakeFiles/SFML.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/michael/Documents/Projects/SFML/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SFML.dir/src/Enemy.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SFML.dir/src/Enemy.cpp.o -MF CMakeFiles/SFML.dir/src/Enemy.cpp.o.d -o CMakeFiles/SFML.dir/src/Enemy.cpp.o -c /Users/michael/Documents/Projects/SFML/src/Enemy.cpp
+
+CMakeFiles/SFML.dir/src/Enemy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SFML.dir/src/Enemy.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/michael/Documents/Projects/SFML/src/Enemy.cpp > CMakeFiles/SFML.dir/src/Enemy.cpp.i
+
+CMakeFiles/SFML.dir/src/Enemy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SFML.dir/src/Enemy.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/michael/Documents/Projects/SFML/src/Enemy.cpp -o CMakeFiles/SFML.dir/src/Enemy.cpp.s
+
+CMakeFiles/SFML.dir/src/Sanzoku.cpp.o: CMakeFiles/SFML.dir/flags.make
+CMakeFiles/SFML.dir/src/Sanzoku.cpp.o: /Users/michael/Documents/Projects/SFML/src/Sanzoku.cpp
+CMakeFiles/SFML.dir/src/Sanzoku.cpp.o: CMakeFiles/SFML.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/michael/Documents/Projects/SFML/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SFML.dir/src/Sanzoku.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SFML.dir/src/Sanzoku.cpp.o -MF CMakeFiles/SFML.dir/src/Sanzoku.cpp.o.d -o CMakeFiles/SFML.dir/src/Sanzoku.cpp.o -c /Users/michael/Documents/Projects/SFML/src/Sanzoku.cpp
+
+CMakeFiles/SFML.dir/src/Sanzoku.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SFML.dir/src/Sanzoku.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/michael/Documents/Projects/SFML/src/Sanzoku.cpp > CMakeFiles/SFML.dir/src/Sanzoku.cpp.i
+
+CMakeFiles/SFML.dir/src/Sanzoku.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SFML.dir/src/Sanzoku.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/michael/Documents/Projects/SFML/src/Sanzoku.cpp -o CMakeFiles/SFML.dir/src/Sanzoku.cpp.s
+
 # Object files for target SFML
 SFML_OBJECTS = \
 "CMakeFiles/SFML.dir/src/main.cpp.o" \
 "CMakeFiles/SFML.dir/src/Player.cpp.o" \
-"CMakeFiles/SFML.dir/src/Layer.cpp.o"
+"CMakeFiles/SFML.dir/src/Layer.cpp.o" \
+"CMakeFiles/SFML.dir/src/Enemy.cpp.o" \
+"CMakeFiles/SFML.dir/src/Sanzoku.cpp.o"
 
 # External object files for target SFML
 SFML_EXTERNAL_OBJECTS =
@@ -126,12 +156,14 @@ SFML_EXTERNAL_OBJECTS =
 SFML: CMakeFiles/SFML.dir/src/main.cpp.o
 SFML: CMakeFiles/SFML.dir/src/Player.cpp.o
 SFML: CMakeFiles/SFML.dir/src/Layer.cpp.o
+SFML: CMakeFiles/SFML.dir/src/Enemy.cpp.o
+SFML: CMakeFiles/SFML.dir/src/Sanzoku.cpp.o
 SFML: CMakeFiles/SFML.dir/build.make
 SFML: /opt/homebrew/lib/libsfml-graphics.3.0.2.dylib
 SFML: /opt/homebrew/lib/libsfml-window.3.0.2.dylib
 SFML: /opt/homebrew/lib/libsfml-system.3.0.2.dylib
 SFML: CMakeFiles/SFML.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/michael/Documents/Projects/SFML/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable SFML"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/michael/Documents/Projects/SFML/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable SFML"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SFML.dir/link.txt --verbose=$(VERBOSE)
 	/opt/homebrew/bin/cmake -E copy_directory /Users/michael/Documents/Projects/SFML/assets /Users/michael/Documents/Projects/SFML/build/assets
 

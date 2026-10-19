@@ -129,6 +129,30 @@ SFML/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/build
 .PHONY : SFML/fast
 
+src/Enemy.o: src/Enemy.cpp.o
+.PHONY : src/Enemy.o
+
+# target to build an object file
+src/Enemy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/src/Enemy.cpp.o
+.PHONY : src/Enemy.cpp.o
+
+src/Enemy.i: src/Enemy.cpp.i
+.PHONY : src/Enemy.i
+
+# target to preprocess a source file
+src/Enemy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/src/Enemy.cpp.i
+.PHONY : src/Enemy.cpp.i
+
+src/Enemy.s: src/Enemy.cpp.s
+.PHONY : src/Enemy.s
+
+# target to generate assembly for a file
+src/Enemy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/src/Enemy.cpp.s
+.PHONY : src/Enemy.cpp.s
+
 src/Layer.o: src/Layer.cpp.o
 .PHONY : src/Layer.o
 
@@ -177,6 +201,30 @@ src/Player.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/src/Player.cpp.s
 .PHONY : src/Player.cpp.s
 
+src/Sanzoku.o: src/Sanzoku.cpp.o
+.PHONY : src/Sanzoku.o
+
+# target to build an object file
+src/Sanzoku.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/src/Sanzoku.cpp.o
+.PHONY : src/Sanzoku.cpp.o
+
+src/Sanzoku.i: src/Sanzoku.cpp.i
+.PHONY : src/Sanzoku.i
+
+# target to preprocess a source file
+src/Sanzoku.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/src/Sanzoku.cpp.i
+.PHONY : src/Sanzoku.cpp.i
+
+src/Sanzoku.s: src/Sanzoku.cpp.s
+.PHONY : src/Sanzoku.s
+
+# target to generate assembly for a file
+src/Sanzoku.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/src/Sanzoku.cpp.s
+.PHONY : src/Sanzoku.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -210,12 +258,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SFML"
+	@echo "... src/Enemy.o"
+	@echo "... src/Enemy.i"
+	@echo "... src/Enemy.s"
 	@echo "... src/Layer.o"
 	@echo "... src/Layer.i"
 	@echo "... src/Layer.s"
 	@echo "... src/Player.o"
 	@echo "... src/Player.i"
 	@echo "... src/Player.s"
+	@echo "... src/Sanzoku.o"
+	@echo "... src/Sanzoku.i"
+	@echo "... src/Sanzoku.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

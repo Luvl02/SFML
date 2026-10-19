@@ -85,12 +85,12 @@ clean: CMakeFiles/SFML.dir/clean
 CMakeFiles/SFML.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/michael/Documents/Projects/SFML/build/CMakeFiles --progress-num=1,2,3,4 "Built target SFML"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/michael/Documents/Projects/SFML/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target SFML"
 .PHONY : CMakeFiles/SFML.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/SFML.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michael/Documents/Projects/SFML/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michael/Documents/Projects/SFML/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/SFML.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/michael/Documents/Projects/SFML/build/CMakeFiles 0
 .PHONY : CMakeFiles/SFML.dir/rule
@@ -102,7 +102,7 @@ SFML: CMakeFiles/SFML.dir/rule
 # codegen rule for target.
 CMakeFiles/SFML.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SFML.dir/build.make CMakeFiles/SFML.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/michael/Documents/Projects/SFML/build/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target SFML"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/michael/Documents/Projects/SFML/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target SFML"
 .PHONY : CMakeFiles/SFML.dir/codegen
 
 # clean rule for target.

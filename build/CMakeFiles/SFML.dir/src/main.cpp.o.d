@@ -1094,4 +1094,6 @@ CMakeFiles/SFML.dir/src/main.cpp.o: \
   /opt/homebrew/include/SFML/System/MemoryInputStream.hpp \
   /opt/homebrew/include/SFML/System/Sleep.hpp \
   /Users/michael/Documents/Projects/SFML/src/Player.h \
-  /Users/michael/Documents/Projects/SFML/src/Layer.h
+  /Users/michael/Documents/Projects/SFML/src/Layer.h \
+  /Users/michael/Documents/Projects/SFML/src/Sanzoku.h \
+  /Users/michael/Documents/Projects/SFML/src/Enemy.h

@@ -20,6 +20,10 @@ src/Player.h
 src/Player.cpp
 src/Layer.h
 src/Layer.cpp
+src/Enemy.h
+src/Enemy.cpp
+src/Sanzoku.h
+src/Sanzoku.cpp
 )
 
 # Define your executable and its source files

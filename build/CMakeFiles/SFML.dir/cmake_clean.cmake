@@ -1,8 +1,12 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/SFML.dir/src/Enemy.cpp.o"
+  "CMakeFiles/SFML.dir/src/Enemy.cpp.o.d"
   "CMakeFiles/SFML.dir/src/Layer.cpp.o"
   "CMakeFiles/SFML.dir/src/Layer.cpp.o.d"
   "CMakeFiles/SFML.dir/src/Player.cpp.o"
   "CMakeFiles/SFML.dir/src/Player.cpp.o.d"
+  "CMakeFiles/SFML.dir/src/Sanzoku.cpp.o"
+  "CMakeFiles/SFML.dir/src/Sanzoku.cpp.o.d"
   "CMakeFiles/SFML.dir/src/main.cpp.o"
   "CMakeFiles/SFML.dir/src/main.cpp.o.d"
   "SFML"

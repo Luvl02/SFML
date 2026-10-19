@@ -16,5 +16,17 @@
   "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/SFML.dir/src/Layer.cpp.o -c /Users/michael/Documents/Projects/SFML/src/Layer.cpp",
   "file": "/Users/michael/Documents/Projects/SFML/src/Layer.cpp",
   "output": "CMakeFiles/SFML.dir/src/Layer.cpp.o"
+},
+{
+  "directory": "/Users/michael/Documents/Projects/SFML/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/SFML.dir/src/Enemy.cpp.o -c /Users/michael/Documents/Projects/SFML/src/Enemy.cpp",
+  "file": "/Users/michael/Documents/Projects/SFML/src/Enemy.cpp",
+  "output": "CMakeFiles/SFML.dir/src/Enemy.cpp.o"
+},
+{
+  "directory": "/Users/michael/Documents/Projects/SFML/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/SFML.dir/src/Sanzoku.cpp.o -c /Users/michael/Documents/Projects/SFML/src/Sanzoku.cpp",
+  "file": "/Users/michael/Documents/Projects/SFML/src/Sanzoku.cpp",
+  "output": "CMakeFiles/SFML.dir/src/Sanzoku.cpp.o"
 }
 ]
