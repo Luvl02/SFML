@@ -159,13 +159,13 @@ void Player::Update(float deltaTime)
 void Player::handleAttack()
 {
   if (sprite.getScale().x > 0.f)
-{
-   playerFacingRight = true;
-}
-else
-{
-  playerFacingRight = false;
-}
+  {
+    playerFacingRight = true;
+  }
+  else
+  {
+    playerFacingRight = false;
+  }
 
   // 1. Trigger the attack when K is pressed
   if (!isAttacking && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::K))

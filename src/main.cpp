@@ -50,6 +50,8 @@ Clock clock;
     }
     /*Update*/
     player.Update(deltaTime);
+    if(!sanzoku.isDead())
+    {
     sanzoku.Update( deltaTime, player.getPosition());
 
      sf::FloatRect playerAttack = player.getAttackBounds();
@@ -66,6 +68,7 @@ Clock clock;
         }
         // TODO: Trigger enemy damage or knockback here!
     }
+    }
     /*Update*/
 
 
@@ -73,7 +76,10 @@ Clock clock;
     window.clear(Color::Black);
 
     map.Draw( window );
-    sanzoku.Draw( window );
+    if(!sanzoku.isDead())
+    {
+      sanzoku.Draw( window );
+    }
     player.Draw( window );
     map.drawLast( window );
     window.display();

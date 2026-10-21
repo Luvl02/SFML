@@ -40,6 +40,7 @@ void Enemy::Draw(sf::RenderWindow &window)
 {
   window.draw( sprite );
   //window.draw(debugHitbox);
+  window.draw( rectangle );
 }
 
 sf::Vector2f Enemy::getPosition() const
@@ -69,4 +70,14 @@ void Enemy::decreaseHealth()
 
 bool Enemy::isDead() const { return health <= 0; }
 
-
+bool Enemy::isDead()
+{
+  if(health == 0 && isDeathAnimationFinished)
+  { 
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}

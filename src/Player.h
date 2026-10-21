@@ -45,8 +45,11 @@ class Player
     float attackFrameDuration = .05f;
     bool isAttacking = false;
     bool playerFacingRight = true;
+    int health = 100;
 
   public:
+    void decreaseHealth(int amount) { health -= amount; }
+    sf::FloatRect getGlobalBounds() const { return sprite.getGlobalBounds(); }
     Player();
     ~Player();
 

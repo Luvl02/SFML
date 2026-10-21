@@ -16,9 +16,16 @@ class Enemy
     int healthIndex;
     float hurtTimer = 0.f;
 
+    sf::FloatRect enemyAttackBox;
+    bool enemyFacingRight = true;
+     sf::RectangleShape rectangle;
+
   public:
   sf::RectangleShape debugHitbox;
     int health;
+    bool isDeathAnimationFinished = false; 
+
+    public:
     Enemy(float startX, float startY);
     virtual ~Enemy();
 
@@ -34,5 +41,6 @@ class Enemy
     bool tookDamage();
     void decreaseHealth();
     bool isDead() const;
+    bool isDead();
 
 };
