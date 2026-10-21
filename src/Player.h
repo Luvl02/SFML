@@ -24,8 +24,13 @@ class Player
     float groundLevel = 608.f;   // Where your floor currently sits
     float gravityDelay = .02;
 
+     sf::FloatRect playerAttackBox;
+
     sf::Clock animationClock;
     sf::Clock delayClock;
+
+
+    bool hasDealtDamage = false; // Tracks if current swing already hit
   public:
     sf::Sprite sprite;
 
@@ -39,6 +44,7 @@ class Player
     float frameDuration = .1f;
     float attackFrameDuration = .05f;
     bool isAttacking = false;
+    bool playerFacingRight = true;
 
   public:
     Player();
@@ -59,4 +65,9 @@ class Player
     void Draw(sf::RenderWindow& window);
 
     sf::Vector2f getPosition();
+    sf::FloatRect getAttackBounds() const;
+
+    bool hasHitEnemy() const;
+    void setHitEnemy(bool hit);
+    sf::RectangleShape rectangle;
 };

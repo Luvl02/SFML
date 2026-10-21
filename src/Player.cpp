@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Enemy.h"
 #include <iostream>
 
 Player::Player():
@@ -79,13 +80,33 @@ void Player::Load()
 
 void Player::Update(float deltaTime)
 {
+  sf::Vector2f position = sprite.getPosition();
 
+
+  if(!isAttacking)
+  {
+    handleInput(position, deltaTime);
+  }
   handleAttack();
 
   // If we are currently attacking, we usually want to lock movement
   if (isAttacking)
   {
-        sf::Vector2f position = sprite.getPosition();
+
+
+    if(playerFacingRight)
+    {
+        // Spawn hitbox to the right of the player
+        playerAttackBox = sf::FloatRect({position.x + 25.f, position.y}, {50.f, 50.f});
+    }
+    else
+    {
+        // Spawn hitbox to the left of the player
+        playerAttackBox = sf::FloatRect({position.x - 100.f, position.y}, {50.f, 50.f});
+    }
+
+    rectangle.setPosition({playerAttackBox.position.x, playerAttackBox.position.y});
+    rectangle.setSize({playerAttackBox.size.x, playerAttackBox.size.y});
 
     // 1. Maintain horizontal momentum during attacks (Ground or Air)
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
@@ -124,11 +145,11 @@ void Player::Update(float deltaTime)
     //return; 
   }
    // Fetch position once for this frame
-  sf::Vector2f position = sprite.getPosition();
+  position = sprite.getPosition();
 
+        handleJump(position, deltaTime);
   // Pass position by reference (&) so both functions can modify it
-  handleJump(position, deltaTime);
-  handleInput(position, deltaTime);
+  
 
   // Apply the final combined position once at the end
   sprite.setPosition(position);
@@ -137,10 +158,20 @@ void Player::Update(float deltaTime)
 
 void Player::handleAttack()
 {
+  if (sprite.getScale().x > 0.f)
+{
+   playerFacingRight = true;
+}
+else
+{
+  playerFacingRight = false;
+}
+
   // 1. Trigger the attack when K is pressed
   if (!isAttacking && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::K))
   {
     isAttacking = true;
+    hasDealtDamage = false;
     count++;
     if (count > 2)
     {
@@ -345,9 +376,29 @@ void Player::handleJump(sf::Vector2f& position, float DeltaTime)
 void Player::Draw(sf::RenderWindow& window)
 {
   window.draw( sprite );
+  //window.draw(rectangle);
 }
 
 sf::Vector2f Player::getPosition()
 {
   return sprite.getPosition();
+}
+
+sf::FloatRect Player::getAttackBounds() const
+{
+  if (!isAttacking)
+  {
+    return sf::FloatRect({0.f, 0.f}, {0.f, 0.f});
+  }
+  return playerAttackBox;
+}
+
+bool Player::hasHitEnemy() const
+{
+  return hasDealtDamage;
+}
+
+void Player::setHitEnemy(bool hit)
+{
+  hasDealtDamage = hit;
 }

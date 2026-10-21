@@ -5,15 +5,29 @@
 Sanzoku::Sanzoku(float startX, float startY): Enemy(startX, startY)
 {
   enemySpeed = .3;
+  health = 200;
+  healthIndex = health;
 }
 
 Sanzoku::~Sanzoku()
 {
 }
 
+sf::FloatRect Sanzoku::getGlobalBounds() const
+{
+    sf::Vector2f pos = sprite.getPosition();
+    
+    // Custom tight box ignoring transparent padding
+    return sf::FloatRect(
+        {pos.x - 30.f, pos.y}, 
+        {60.f, 60.f}                 
+    );
+}
+
+
 void Sanzoku::Load()
 {
-    if (standingTexture.loadFromFile("assets/Enemies/sanzoku/IDLE.png") && attackTexture.loadFromFile("assets/Enemies/sanzoku/RUN.png"))
+    if (standingTexture.loadFromFile("assets/Enemies/sanzoku/IDLE.png") && attackTexture.loadFromFile("assets/Enemies/sanzoku/RUN.png") && damageTexture.loadFromFile("assets/Enemies/sanzoku/HURT.png"))
     {
         std::cout << "Sanzoku Texture Loaded Successfully" << std::endl;
     }
@@ -26,13 +40,21 @@ void Sanzoku::Load()
     sprite.setTextureRect(sf::IntRect({0, 0}, {96, 96})); // Assuming 96x96 frames like your player
     sprite.setOrigin({96.f / 2.f, 25.f});
     sprite.setScale(sf::Vector2f(2.f, 2.f));
+
+    debugHitbox.setFillColor(sf::Color::Transparent);
+    debugHitbox.setOutlineColor(sf::Color::Cyan);
+    debugHitbox.setOutlineThickness(2.f);
 }
 
 
 void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
 {
   // Print these when you get close to see what coordinates are being passed
-    std::cout << "Player X: " << playerPosition.x << " | Sanzoku X: " << sprite.getPosition().x << std::endl;
+  sf::FloatRect bounds = getGlobalBounds();
+    debugHitbox.setPosition({bounds.position.x, bounds.position.y});
+    debugHitbox.setSize({bounds.size.x, bounds.size.y});
+
+
   sf::Vector2f position = sprite.getPosition();
 
   float distanceX = playerPosition.x - position.x;
@@ -42,20 +64,23 @@ void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
   // 2. AI Chase Range (e.g., if player is within 400 pixels)
 
 
-    if (animationClock.getElapsedTime().asSeconds() >= frameDuration)
+     if(tookDamage() == true)
     {
-        animationFrame++;
-        if (animationFrame >= maxFrames)
-        {
-            animationFrame = 0;
-        }
+        sprite.setTexture( damageTexture );
+        maxFrames = 4;
+        animationFrame = 0;
 
-        sprite.setTextureRect(sf::IntRect(
-            {animationFrame * 96, 0}, {96, 96}));
+        sprite.setTextureRect(sf::IntRect({animationFrame * 96, 0}, {96, 96}));
 
+        hurtTimer = 0.7f;
         animationClock.restart();
     }
-
+    if (hurtTimer > 0.f)
+    {
+      hurtTimer -= deltaTime / 1000.0f; // Decrement timer based on your deltaTime scale
+    }
+    else
+    {
     if (absoluteDistance < 400.f && absoluteDistance > 85.f)
     {
       sprite.setTexture( attackTexture );
@@ -82,7 +107,22 @@ void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
         sprite.setTexture( standingTexture );
         maxFrames = 5;
     }
+    }
 
+
+    if (animationClock.getElapsedTime().asSeconds() >= frameDuration)
+    {
+        animationFrame++;
+        if (animationFrame >= maxFrames)
+        {
+            animationFrame = 0;
+        }
+
+        sprite.setTextureRect(sf::IntRect(
+            {animationFrame * 96, 0}, {96, 96}));
+
+        animationClock.restart();
+    }
     applyGravity( deltaTime );
 
     // 3. Update sprite position

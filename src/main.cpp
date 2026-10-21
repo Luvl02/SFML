@@ -51,6 +51,21 @@ Clock clock;
     /*Update*/
     player.Update(deltaTime);
     sanzoku.Update( deltaTime, player.getPosition());
+
+     sf::FloatRect playerAttack = player.getAttackBounds();
+    if (playerAttack.size.x > 0 && playerAttack.findIntersection(sanzoku.getGlobalBounds()))
+    {
+      
+      if (!player.hasHitEnemy())
+        {
+            sanzoku.decreaseHealth();
+            player.setHitEnemy(true); // Mark this swing as having landed a hit
+            
+            cout << sanzoku.health << endl;
+            std::cout << "Hit Sanzoku!" << std::endl;
+        }
+        // TODO: Trigger enemy damage or knockback here!
+    }
     /*Update*/
 
 

@@ -3208,6 +3208,7 @@ CMakeFiles/SFML.dir/src/Player.cpp.o: /Users/michael/Documents/Projects/SFML/src
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdarg.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdint.h \
+  /Users/michael/Documents/Projects/SFML/src/Enemy.h \
   /Users/michael/Documents/Projects/SFML/src/Player.h \
   /opt/homebrew/include/SFML/Config.hpp \
   /opt/homebrew/include/SFML/Graphics.hpp \

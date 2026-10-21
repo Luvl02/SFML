@@ -12,6 +12,11 @@ Enemy::~Enemy()
 {
 }
 
+sf::FloatRect Enemy::getGlobalBounds() const
+{
+  return sprite.getGlobalBounds();
+}
+
 void Enemy::applyGravity(float deltaTime)
 {
     if (!isGrounded)
@@ -34,9 +39,34 @@ void Enemy::applyGravity(float deltaTime)
 void Enemy::Draw(sf::RenderWindow &window)
 {
   window.draw( sprite );
+  //window.draw(debugHitbox);
 }
 
 sf::Vector2f Enemy::getPosition() const
 {
   return sprite.getPosition();
 }
+
+bool Enemy::tookDamage()
+{
+  bool tookDmg;
+  if(this-> healthIndex > this-> health)
+  {
+    tookDmg = true;
+  }
+  else
+  {
+    tookDmg = false;
+  }
+  this-> healthIndex = this-> health;
+  return tookDmg;
+}
+
+void Enemy::decreaseHealth()
+{
+  health -= 50;
+}
+
+bool Enemy::isDead() const { return health <= 0; }
+
+
