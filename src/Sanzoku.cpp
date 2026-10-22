@@ -75,6 +75,17 @@ void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
   float absoluteDistance = std::abs( distanceX );
   position.x = std::max(0.f, std::min(position.x, 1280.f));
 
+if(enemyFacingRight)
+{
+    // Spawn hitbox to the right of the player
+    enemyAttackBox = sf::FloatRect({position.x + 25.f, position.y}, {50.f, 50.f});
+}
+else
+{
+    // Spawn hitbox to the left of the player
+    enemyAttackBox = sf::FloatRect({position.x - 100.f, position.y}, {50.f, 50.f});
+}
+
   // 2. AI Chase Range (e.g., if player is within 400 pixels)
     if (sprite.getScale().x > 0.f)
     {
@@ -100,11 +111,23 @@ void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
     {
       hurtTimer -= deltaTime / 1000.0f; // Decrement timer based on deltaTime scale
     }
+    else if(health == 0)
+        {
+            maxFrames = 9;
+            sprite.setTexture( deathTexture );
+
+             if (animationFrame >= maxFrames - 1)
+            {
+                animationFrame = maxFrames-1; 
+                isDeathAnimationFinished = true; 
+            }
+        }
     else
     {
     if (absoluteDistance < 400.f && absoluteDistance > 85.f && health != 0)
     {
         isAttacking = false;
+        frameDuration = .15;
       sprite.setTexture( runTexture );
       maxFrames = 8;
         if (distanceX > 0)
@@ -129,17 +152,9 @@ void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
         if (!isAttacking)
         {
             isAttacking = true;
-
-            if(enemyFacingRight)
-            {
-                // Spawn hitbox to the right of the player
-                enemyAttackBox = sf::FloatRect({position.x + 25.f, position.y}, {50.f, 50.f});
-            }
-            else
-            {
-                // Spawn hitbox to the left of the player
-                enemyAttackBox = sf::FloatRect({position.x - 100.f, position.y}, {50.f, 50.f});
-            }
+            frameDuration = .07;
+            hasDealtDamage = false;
+            attackAnimationFinished = false;
 
             rectangle.setPosition({enemyAttackBox.position.x, enemyAttackBox.position.y});
             rectangle.setSize({enemyAttackBox.size.x, enemyAttackBox.size.y});
@@ -152,12 +167,13 @@ void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
             // Set correct max frames based on variation
             if (attackType == 2)
             {
-                maxFrames = 7; // Attack 2 has 7 frames[span_4](start_span)[span_4](end_span)
+                maxFrames = 7;
             }
             else
             {
                 maxFrames = 5;
             }
+            
 
             animationFrame = 0;
             animationClock.restart();
@@ -171,17 +187,6 @@ void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
             maxFrames = 5;
         }
 
-        if(health == 0)
-        {
-            maxFrames = 9;
-            sprite.setTexture( deathTexture );
-
-             if (animationFrame >= maxFrames - 1)
-            {
-                animationFrame = maxFrames-1; 
-                isDeathAnimationFinished = true; 
-            }
-        }
     }
     }
 
@@ -195,11 +200,14 @@ void Sanzoku::Update(float deltaTime, sf::Vector2f playerPosition)
 
             if (isAttacking)
             {
+                //frameDuration = .1;
+                attackAnimationFinished = true;
                 if (absoluteDistance <= 85.f && health > 0)
                 {
                     // Randomly roll the next combo attack
                     attackType = rand() % 3;
                     sprite.setTexture(attackTextures[attackType]);
+                    hasDealtDamage = false;
 
                     if (attackType == 2)
                     {

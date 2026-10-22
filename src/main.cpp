@@ -50,6 +50,26 @@ Clock clock;
     }
     /*Update*/
     player.Update(deltaTime);
+
+    if(!sanzoku.isDead())
+    {
+
+     sf::FloatRect sanzokuAttack = sanzoku.getAttackBounds();
+    if (sanzokuAttack.size.x > 0 && sanzokuAttack.findIntersection(player.getGlobalBounds()))
+    {
+      
+      if (!sanzoku.hasHitPlayer() && sanzoku.attackAnimationFinished)
+        {
+            player.decreaseHealth();
+            sanzoku.setHitPlayer(true); // Mark this swing as having landed a hit
+            
+            cout << player.health << endl;
+            std::cout << "Hit Player!" << std::endl;
+        }
+        // TODO: Trigger enemy damage or knockback here!
+    }
+    }
+
     if(!sanzoku.isDead())
     {
     sanzoku.Update( deltaTime, player.getPosition());

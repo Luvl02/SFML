@@ -15,7 +15,6 @@ class Sanzoku : public Enemy
     float frameDuration = .15;
     sf::Clock animationClock;
 
-    bool isAttacking = false;
     int attackCount = -1;
     int attackType;
     int lastAttack = -1;

@@ -7,6 +7,8 @@ class Player
     sf:: Texture standingTexture;
     sf:: Texture runTexture; 
     sf::Texture runLeftTexture;
+    sf::Texture damageTexture;
+    sf::Texture dashTexture;
     std::vector<sf::Texture> attackTextures;
     std::vector<sf::Texture> jumpTextures;
 
@@ -24,15 +26,22 @@ class Player
     float groundLevel = 608.f;   // Where your floor currently sits
     float gravityDelay = .02;
 
-     sf::FloatRect playerAttackBox;
+    float hurtTimer = 0.f;
+    float invincibilityTimer = 0.0f;
+
+
+    sf::FloatRect playerAttackBox;
 
     sf::Clock animationClock;
     sf::Clock delayClock;
 
 
     bool hasDealtDamage = false; // Tracks if current swing already hit
+
+    
   public:
     sf::Sprite sprite;
+    sf::RectangleShape debugHitbox;
 
     int count = -1;
     int Xindex = 0;
@@ -44,12 +53,13 @@ class Player
     float frameDuration = .1f;
     float attackFrameDuration = .05f;
     bool isAttacking = false;
+    bool isDashing = false;
     bool playerFacingRight = true;
-    int health = 100;
+    int health = 400;
+    int healthIndex;
 
   public:
-    void decreaseHealth(int amount) { health -= amount; }
-    sf::FloatRect getGlobalBounds() const { return sprite.getGlobalBounds(); }
+   
     Player();
     ~Player();
 
@@ -57,20 +67,31 @@ class Player
 
     void Load();
 
+    //game loop functions
     void Update(float deltaTime);
 
     void handleAttack();
 
     void handleInput(sf::Vector2f& position, float deltaTime);
 
+    void handleDash(sf::Vector2f& position, float deltaTime);
+
     void handleJump(sf::Vector2f& position, float deltaTime);
 
     void Draw(sf::RenderWindow& window);
 
     sf::Vector2f getPosition();
-    sf::FloatRect getAttackBounds() const;
 
+    //combat functions
+    sf::FloatRect getAttackBounds() const;
     bool hasHitEnemy() const;
     void setHitEnemy(bool hit);
     sf::RectangleShape rectangle;
+
+    bool tookDamage();
+    void decreaseHealth();
+    bool isDead();
+
+    sf::FloatRect getGlobalBounds() const;
+    void applyGravity(float deltaTime);
 };

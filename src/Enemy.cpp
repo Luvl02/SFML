@@ -40,7 +40,7 @@ void Enemy::Draw(sf::RenderWindow &window)
 {
   window.draw( sprite );
   //window.draw(debugHitbox);
-  window.draw( rectangle );
+  //window.draw( rectangle );
 }
 
 sf::Vector2f Enemy::getPosition() const
@@ -65,14 +65,17 @@ bool Enemy::tookDamage()
 
 void Enemy::decreaseHealth()
 {
-  health -= 50;
+  if(health > 0)
+  {
+    health -= 50;
+  }
 }
 
-bool Enemy::isDead() const { return health <= 0; }
+
 
 bool Enemy::isDead()
 {
-  if(health == 0 && isDeathAnimationFinished)
+  if(health <= 0 && isDeathAnimationFinished)
   { 
     return true;
   }
@@ -80,4 +83,23 @@ bool Enemy::isDead()
   {
     return false;
   }
+}
+
+bool Enemy::hasHitPlayer() const
+{
+  return hasDealtDamage;
+}
+
+void Enemy::setHitPlayer(bool hit)
+{
+  hasDealtDamage = hit;
+}
+
+sf::FloatRect Enemy::getAttackBounds() const
+{
+  if (!isAttacking)
+  {
+    return sf::FloatRect({0.f, 0.f}, {0.f, 0.f});
+  }
+  return enemyAttackBox;
 }

@@ -18,7 +18,9 @@ class Enemy
 
     sf::FloatRect enemyAttackBox;
     bool enemyFacingRight = true;
-     sf::RectangleShape rectangle;
+    sf::RectangleShape rectangle;
+    bool isAttacking = false;
+    bool hasDealtDamage = false;
 
   public:
   sf::RectangleShape debugHitbox;
@@ -40,7 +42,12 @@ class Enemy
 
     bool tookDamage();
     void decreaseHealth();
-    bool isDead() const;
     bool isDead();
+
+    bool hasHitPlayer() const;
+    void setHitPlayer(bool hit);
+    bool attackAnimationFinished = false;
+
+    sf::FloatRect getAttackBounds() const;
 
 };
