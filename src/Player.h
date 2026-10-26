@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+class Enemy;
+
 class Player
 {
   private:
@@ -91,6 +93,7 @@ class Player
     bool tookDamage();
     void decreaseHealth();
     bool isDead();
+    void handleDamage(Enemy& enemy);
 
     sf::FloatRect getGlobalBounds() const;
     void applyGravity(float deltaTime);

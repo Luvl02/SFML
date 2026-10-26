@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Layer.h"
@@ -9,7 +12,6 @@ using namespace sf;
 
 int main()
 {
-  std::filesystem::current_path();
 /*Init Window*/
  ContextSettings settings;
  settings.antiAliasingLevel = 8;
@@ -27,6 +29,11 @@ int main()
  Sanzoku sanzoku(1000, 608);
  player.Initialize();
  /*Initilize*/
+
+ vector<unique_ptr<Enemy>> enemies;
+
+ Clock spawnClock;
+ float nextSpawn = 3.5f;
 
  /*Load*/
  map.Load( window );
@@ -48,47 +55,40 @@ Clock clock;
         window.close();
       }
     }
+
+    if (spawnClock.getElapsedTime().asSeconds() >= nextSpawn)
+    {
+        float spawnX = (rand() % 2 == 0) ? 50.f : 1200.f;
+        
+        auto newEnemy = std::make_unique<Sanzoku>(spawnX, 608.f);
+
+        newEnemy->Load();
+
+        enemies.push_back(std::move(newEnemy));
+
+        spawnClock.restart();
+
+        nextSpawn = 3.0f + static_cast<float>(rand() % 4000) / 1000.0f;
+    }
     /*Update*/
     player.Update(deltaTime);
+    player.handleDamage(sanzoku);
 
-    if(!sanzoku.isDead())
+   for (auto& enemy : enemies)
+   {
+    if(!enemy->isDead())
     {
+      enemy->Update(deltaTime, player.getPosition());
 
-     sf::FloatRect sanzokuAttack = sanzoku.getAttackBounds();
-    if (sanzokuAttack.size.x > 0 && sanzokuAttack.findIntersection(player.getGlobalBounds()))
-    {
-      
-      if (!sanzoku.hasHitPlayer() && sanzoku.attackAnimationFinished)
-        {
-            player.decreaseHealth();
-            sanzoku.setHitPlayer(true); // Mark this swing as having landed a hit
-            
-            cout << player.health << endl;
-            std::cout << "Hit Player!" << std::endl;
-        }
-        // TODO: Trigger enemy damage or knockback here!
+      enemy->handleDamage(player);
     }
-    }
-
-    if(!sanzoku.isDead())
-    {
-    sanzoku.Update( deltaTime, player.getPosition());
-
-     sf::FloatRect playerAttack = player.getAttackBounds();
-    if (playerAttack.size.x > 0 && playerAttack.findIntersection(sanzoku.getGlobalBounds()))
-    {
-      
-      if (!player.hasHitEnemy())
-        {
-            sanzoku.decreaseHealth();
-            player.setHitEnemy(true); // Mark this swing as having landed a hit
-            
-            cout << sanzoku.health << endl;
-            std::cout << "Hit Sanzoku!" << std::endl;
-        }
-        // TODO: Trigger enemy damage or knockback here!
-    }
-    }
+   }
+   enemies.erase(
+    std::remove_if(enemies.begin(), enemies.end(), [](const auto& enemy) {
+        return enemy->isDead();
+    }),
+    enemies.end()
+);
     /*Update*/
 
 
@@ -96,10 +96,14 @@ Clock clock;
     window.clear(Color::Black);
 
     map.Draw( window );
-    if(!sanzoku.isDead())
+   
+   for(auto& enemy : enemies)
+   {
+    if(!enemy->isDead())
     {
-      sanzoku.Draw( window );
+      enemy->Draw(window);
     }
+   }
     player.Draw( window );
     map.drawLast( window );
     window.display();

@@ -1,6 +1,7 @@
 #include "Sanzoku.h"
 #include <iostream>
 #include <cmath>
+#include "Player.h"
 
 Sanzoku::Sanzoku(float startX, float startY): Enemy(startX, startY)
 {
@@ -251,4 +252,22 @@ else
 
     // 3. Update sprite position
     sprite.setPosition(position);
+}
+
+void Sanzoku::handleDamage(Player& player)
+{
+     sf::FloatRect playerAttack = player.getAttackBounds();
+    if (playerAttack.size.x > 0 && playerAttack.findIntersection(getGlobalBounds()))
+    {
+      
+      if (!player.hasHitEnemy())
+        {
+            decreaseHealth();
+            player.setHitEnemy(true); // Mark this swing as having landed a hit
+            
+            std::cout << health << std::endl;
+            std::cout << "Hit Sanzoku!" << std::endl;
+        }
+        // TODO: Trigger enemy damage or knockback here!
+    }
 }

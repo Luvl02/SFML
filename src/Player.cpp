@@ -1,6 +1,6 @@
 #include "Player.h"
-#include "Enemy.h"
 #include <iostream>
+#include "Enemy.h"
 
 Player::Player():
 sprite( standingTexture )
@@ -540,6 +540,28 @@ void Player::decreaseHealth()
     invincibilityTimer = .7f;
     animationClock.restart();
   }
+}
+
+void Player::handleDamage(Enemy& enemy)
+{
+  if(!enemy.isDead())
+    {
+
+     sf::FloatRect sanzokuAttack = enemy.getAttackBounds();
+    if (sanzokuAttack.size.x > 0 && sanzokuAttack.findIntersection(getGlobalBounds()))
+    {
+      
+      if (!enemy.hasHitPlayer() && enemy.attackAnimationFinished)
+        {
+            decreaseHealth();
+            enemy.setHitPlayer(true); // Mark this swing as having landed a hit
+            
+            std::cout << health << std::endl;
+            std::cout << "Hit Player!" << std::endl;
+        }
+        // TODO: Trigger enemy damage or knockback here!
+    }
+    }
 }
 
 sf::FloatRect Player::getGlobalBounds() const

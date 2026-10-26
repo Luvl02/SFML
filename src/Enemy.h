@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+class Player;
+
 class Enemy
 {
   protected:
@@ -43,6 +45,7 @@ class Enemy
     bool tookDamage();
     void decreaseHealth();
     bool isDead();
+    virtual void handleDamage(Player& player) = 0;
 
     bool hasHitPlayer() const;
     void setHitPlayer(bool hit);

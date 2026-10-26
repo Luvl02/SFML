@@ -1,6 +1,8 @@
 #pragma once
 #include "Enemy.h"
 
+class Player;
+
 class Sanzoku : public Enemy
 {
   private:
@@ -33,5 +35,7 @@ class Sanzoku : public Enemy
 
     void Load() override;
     void Update(float deltaTime, sf::Vector2f playerPostions) override;
+
+    void handleDamage(Player& player) override;
 
 };

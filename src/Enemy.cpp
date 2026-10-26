@@ -1,4 +1,6 @@
 #include "Enemy.h"
+#include <iostream>
+#include "Player.h"
 
 Enemy::Enemy(float startX, float startY):
 sprite( texture )
