@@ -26,7 +26,6 @@ int main()
  /*Initilize*/
  Map map;
  Player player;
- Sanzoku sanzoku(1000, 608);
  player.Initialize();
  /*Initilize*/
 
@@ -38,8 +37,6 @@ int main()
  /*Load*/
  map.Load( window );
  player.Load();
-
- sanzoku.Load();
  /*Load*/
 
 Clock clock;
@@ -72,7 +69,6 @@ Clock clock;
     }
     /*Update*/
     player.Update(deltaTime);
-    player.handleDamage(sanzoku);
 
    for (auto& enemy : enemies)
    {
@@ -81,6 +77,7 @@ Clock clock;
       enemy->Update(deltaTime, player.getPosition());
 
       enemy->handleDamage(player);
+      player.handleDamage(*enemy);
     }
    }
    enemies.erase(

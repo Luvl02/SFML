@@ -22,6 +22,8 @@ class Sanzoku : public Enemy
     int lastAttack = -1;
     float attackCooldown = 0.f;
 
+    bool hasBeenHitThisSwing = false;
+
 
 
   public:

@@ -256,18 +256,33 @@ else
 
 void Sanzoku::handleDamage(Player& player)
 {
+     if (!player.isAttacking)
+    {
+        hasBeenHitThisSwing = false;
+        return;
+    }
+    
      sf::FloatRect playerAttack = player.getAttackBounds();
     if (playerAttack.size.x > 0 && playerAttack.findIntersection(getGlobalBounds()))
     {
       
-      if (!player.hasHitEnemy())
+      if (player.isAttacking)
         {
-            decreaseHealth();
-            player.setHitEnemy(true); // Mark this swing as having landed a hit
+           sf::FloatRect playerAttack = player.getAttackBounds();
+        
+            if (playerAttack.size.x > 0 && playerAttack.findIntersection(getGlobalBounds()))
+            {
+                // If this specific enemy hasn't been hit yet during this attack swing
+                if (!hasBeenHitThisSwing)
+                {
+                    decreaseHealth();
+                    hasBeenHitThisSwing = true; // Lock it so this enemy only takes damage once per swing
+                    
+                    std::cout << health << std::endl;
+                    std::cout << "Hit Sanzoku!" << std::endl;
+                }
+            }
             
-            std::cout << health << std::endl;
-            std::cout << "Hit Sanzoku!" << std::endl;
         }
-        // TODO: Trigger enemy damage or knockback here!
     }
 }
