@@ -11,6 +11,7 @@ class Player
     sf::Texture runLeftTexture;
     sf::Texture damageTexture;
     sf::Texture dashTexture;
+    sf::Texture blockTexture;
     std::vector<sf::Texture> attackTextures;
     std::vector<sf::Texture> jumpTextures;
 
@@ -56,6 +57,8 @@ class Player
     float attackFrameDuration = .05f;
     bool isAttacking = false;
     bool isDashing = false;
+    bool isBlocking = false;
+    bool blockImpact = false;
     bool playerFacingRight = true;
     int health = 400;
     int healthIndex;
@@ -94,6 +97,7 @@ class Player
     void decreaseHealth();
     bool isDead();
     void handleDamage(Enemy& enemy);
+    void handleBlock();
 
     sf::FloatRect getGlobalBounds() const;
     void applyGravity(float deltaTime);

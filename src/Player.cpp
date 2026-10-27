@@ -21,7 +21,7 @@ void Player::Initialize()
 void Player::Load()
 {
   if(standingTexture.loadFromFile("assets/PlayerCharacter/standing.png")&&
-  runTexture.loadFromFile("assets/PlayerCharacter/RUN.png") && damageTexture.loadFromFile("assets/PlayerCharacter/HURT.png") && dashTexture.loadFromFile("assets/PlayerCharacter/DASH.png"))
+  runTexture.loadFromFile("assets/PlayerCharacter/RUN.png") && damageTexture.loadFromFile("assets/PlayerCharacter/HURT.png") && dashTexture.loadFromFile("assets/PlayerCharacter/DASH.png") && blockTexture.loadFromFile("assets/PlayerCharacter/DEFEND.png"))
   {
     std::cout << "Player Image-> Loaded" << std::endl;
   }
@@ -191,6 +191,7 @@ sf::FloatRect bounds = getGlobalBounds();
   position = sprite.getPosition();
   handleDash(position, deltaTime);
   handleJump(position, deltaTime);
+  handleBlock();
   
   
 
@@ -272,7 +273,7 @@ void Player::handleAttack()
 
 void Player::handleInput(sf::Vector2f& position,float deltaTime)
 {
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && !isBlocking)
   {
     if(isGrounded)
     {    
@@ -298,7 +299,7 @@ void Player::handleInput(sf::Vector2f& position,float deltaTime)
         animationClock.restart();
     }
   }
-  else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+  else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && !isBlocking)
   {
     if(isGrounded)
     {
@@ -544,7 +545,7 @@ void Player::decreaseHealth()
 
 void Player::handleDamage(Enemy& enemy)
 {
-  if(!enemy.isDead())
+  if(!enemy.isDead() )
     {
 
      sf::FloatRect sanzokuAttack = enemy.getAttackBounds();
@@ -553,14 +554,80 @@ void Player::handleDamage(Enemy& enemy)
       
       if (!enemy.hasHitPlayer() && enemy.attackAnimationFinished)
         {
+          // 1. Calculate the horizontal direction from player to enemy
+          float directionToEnemy = enemy.getPosition().x - getPosition().x;
+          
+          // 2. Check if player is facing right and enemy is to the right, 
+          // OR player is facing left and enemy is to the left
+          bool isFacingEnemy = (playerFacingRight && directionToEnemy > 0.f) ||  (!playerFacingRight && directionToEnemy < 0.f);
+
+          if (isBlocking && isFacingEnemy)
+          {
+              std::cout << "Blocked Attack!" << std::endl;
+              
+              // Trigger the full block/spark animation starting from Frame 1
+              blockImpact = true;
+              animationFrame = 1; 
+              animationClock.restart();
+
+              enemy.setHitPlayer(true); // Consume the enemy's attack hit
+          }
+          else
+          {
             decreaseHealth();
             enemy.setHitPlayer(true); // Mark this swing as having landed a hit
             
             std::cout << health << std::endl;
             std::cout << "Hit Player!" << std::endl;
+          }
         }
         // TODO: Trigger enemy damage or knockback here!
     }
+    }
+}
+
+void Player::handleBlock()
+{
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::J))
+  {
+    isBlocking = true;
+    sprite.setTexture( blockTexture );
+
+    if (!blockImpact)
+    {
+        // Hold Frame 0 (start-up stance) while waiting for an incoming attack
+        animationFrame = 0;
+        sprite.setTextureRect(sf::IntRect({animationFrame * 96, 0}, {96, 96}));
+    }
+    else if(blockImpact)
+    {
+        // Play through the rest of the block animation (Frames 1 to 5) when hit
+        if (animationClock.getElapsedTime().asSeconds() >= frameDuration)
+        {
+            animationFrame++;
+            if (animationFrame >= 6) // Assuming 6 total frames on your sheet (0 to 5)
+            {
+                blockImpact = false; // Finished full animation
+                animationFrame = 0;  // Return to Frame 0 start-up
+            }
+
+            sprite.setTextureRect(sf::IntRect({animationFrame * 96, 0}, {96, 96}));
+            animationClock.restart();
+        }
+        }
+  }
+    else
+    {
+        // Released 'J'
+        if (isBlocking)
+        {
+            isBlocking = false;
+            blockImpact = false;
+            animationFrame = 0;
+            maxFrames = 10;
+            sprite.setTexture(standingTexture);
+            sprite.setTextureRect(sf::IntRect({0, 0}, {size.x, size.y}));
+        }
     }
 }
 

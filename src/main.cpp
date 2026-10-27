@@ -68,7 +68,7 @@ Clock clock;
         nextSpawn = 3.0f + static_cast<float>(rand() % 4000) / 1000.0f;
     }
     /*Update*/
-    player.Update(deltaTime);
+      player.Update(deltaTime);
 
    for (auto& enemy : enemies)
    {
